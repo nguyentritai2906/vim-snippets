@@ -148,6 +148,20 @@ if len(args) == 0:
 }
 endsnippet
 
+snippet con "constructor" b
+`!p
+args = getArgs(t[1])
+if len(args) > 0:
+	snip.rv += "\n"`
+public `!p snip.rv = snip.basename or "unknown"`($1) {`!p
+args = getArgs(t[1])
+for i in args:
+	snip.rv += "\n\t\tthis.%s = %s;" % (i[1], i[1])
+if len(args) == 0:
+	snip.rv += "\n"`
+}
+endsnippet
+
 snippet clc "class and constructor" b
 public class `!p
 snip.rv = snip.basename or "untitled"` {
@@ -180,14 +194,14 @@ endsnippet
 
 snippet elif "else if"
 else if ($1)`!p nl(snip)`{
-	$0${VISUAL}
-}
+	$2${VISUAL}
+}$0
 endsnippet
 
 snippet el "else" w
 else`!p nl(snip)`{
-	$0${VISUAL}
-}
+	$1${VISUAL}
+}$0
 endsnippet
 
 snippet fi "final" b
@@ -196,26 +210,56 @@ endsnippet
 
 snippet fore "for (each)" b
 for ($1 : $2)`!p nl(snip)`{
-	$0
-}
+	$3
+}$0
 endsnippet
 
 snippet fori "for" b
 for (int ${1:i} = 0; $1 < ${2:10}; $1++)`!p nl(snip)`{
-	$0
-}
+	$3
+}$0
 endsnippet
 
 snippet for "for" b
 for ($1; $2; $3)`!p nl(snip)`{
-	$0
-}
+	$4
+}$0
 endsnippet
 
 snippet if "if" b
 if ($1)`!p nl(snip)`{
-	$0${VISUAL}
-}
+	$2${VISUAL}
+}$0
+endsnippet
+
+snippet ife "if else" b
+if ($1)`!p nl(snip)`{
+	$2${VISUAL}
+} else {
+	$3${VISUAL}
+}$0
+endsnippet
+
+snippet ifee "if else else" b
+if ($1)`!p nl(snip)`{
+	$2${VISUAL}
+} else if`!p nl(snip)`($3){
+	$4${VISUAL}
+} else {
+	$5${VISUAL}
+}$0
+endsnippet
+
+snippet ifeee "if elif elif else" b
+if ($1)`!p nl(snip)`{
+	$2${VISUAL}
+} else if`!p nl(snip)`($3){
+	$4${VISUAL}
+} else if`!p nl(snip)`($5){
+	$6${VISUAL}
+} else {
+	$7${VISUAL}
+}$0
 endsnippet
 
 snippet imt "import junit_framework_TestCase;"  b
@@ -224,7 +268,7 @@ $0
 endsnippet
 
 snippet im "import"  b
-import ${1:java}.${2:util}.$0;
+import ${1:java}.${2:util}.$3;$0
 endsnippet
 
 snippet in "interface" b
@@ -316,9 +360,15 @@ ${1:private} ${2:void} ${3:method}($4) ${5:throws $6 }{
 endsnippet
 
 snippet m  "method" b
-${1:private} ${2:void} ${3:method}($4) {
-	$0
-}
+${1:public} ${2:void} ${3:method}($4) {
+	$5
+}$0
+endsnippet
+
+snippet sm  "static method" b
+${1:public} static ${2:void} ${3:method}($4) {
+	$5
+}$0
 endsnippet
 
 snippet md "Method With javadoc" b
@@ -359,11 +409,11 @@ public void set${1:Name}(${2:String} `!p snip.rv = mixedCase(t[1])`) {
 }`!p snip.rv += "\n"`
 public $2 get$1() {
 	return `!p snip.rv = mixedCase(t[1])`;
-}
+}$0
 endsnippet
 
 snippet pa "package" b
-package $0
+package $1;$0
 endsnippet
 
 snippet p "print" b
@@ -388,6 +438,10 @@ endsnippet
 
 snippet re "return" b
 return $0
+endsnippet
+
+snippet renu "return null" b
+return null;$0
 endsnippet
 
 snippet st "static"
@@ -423,13 +477,19 @@ snippet tt "test throws" b
 endsnippet
 
 snippet th "throw" b
-throw new $0
+throw new $1;$0
 endsnippet
 
 snippet wh "while" b
 while ($1)`!p nl(snip)`{
-	$0
-}
+	$2
+}$0
+endsnippet
+
+snippet dowh "do while" b
+do`!p nl(snip)`{
+	$2
+} while (${1:condition});$0
 endsnippet
 
 # vim:ft=snippets:

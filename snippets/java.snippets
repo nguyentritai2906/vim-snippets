@@ -158,7 +158,7 @@ snippet fa
 snippet ca
 	catch(${1:Exception} ${2:e}) ${0}
 snippet thr
-	throw ${0}
+	throw ${1};$0
 snippet ths
 	throws ${0}
 snippet try
@@ -225,17 +225,17 @@ snippet main
 ##
 ## Print Methods
 snippet sout
-	System.out.println(${0});
+	System.out.println(${1});$0
 snippet serr
-	System.err.println(${0});
+	System.err.println(${1});$0
 snippet print
-	System.out.print("${0:Message}");
+	System.out.print("${1:Message}");$0
 snippet printf
-	System.out.printf("${1:Message}", ${0:args});
+	System.out.printf("${2:Message}", ${1:args});$0
 snippet println
-	System.out.println(${0});
+	System.out.println("${1:Message}");$0
 snippet printlna
-	System.out.println(Arrays.toString(${0}));
+	System.out.println(Arrays.toString(${1}));$0
 ##
 ## Render Methods
 snippet ren
